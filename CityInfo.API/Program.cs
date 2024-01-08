@@ -1,6 +1,7 @@
 using CityInfo.API;
 using CityInfo.API.DbContexts;
 using CityInfo.API.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -28,7 +29,13 @@ builder.Services.AddControllers(options =>
     options.ReturnHttpNotAcceptable = true;
 }).AddNewtonsoftJson()
 .AddXmlDataContractSerializerFormatters();
-    
+
+//builder.Services.AddProblemDetails(options => 
+//    options.CustomizeProblemDetails = ctx =>
+//    {
+//        ctx.ProblemDetails.Extensions.Add("additionalInfo", "Additional info example");
+//        ctx.ProblemDetails.Extensions.Add("server", Environment.MachineName);
+//    });
 
 // Learn more about configuring Swagger/OpenAPI at
 // https://aka.ms/aspnetcore/swashbuckle
