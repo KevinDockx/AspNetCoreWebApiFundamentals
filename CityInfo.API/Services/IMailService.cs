@@ -1,7 +1,6 @@
-﻿namespace CityInfo.API.Services
+﻿namespace CityInfo.API.Services;
+
+public interface IMailService
 {
-    public interface IMailService
-    {
-        void Send(string subject, string message);
-    }
+    void Send(string subject, string message);
 }

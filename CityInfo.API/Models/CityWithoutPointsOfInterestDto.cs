@@ -1,25 +1,22 @@
-﻿using CityInfo.API.Entities;
+﻿namespace CityInfo.API.Models;
 
-namespace CityInfo.API.Models
+/// <summary>
+/// A city without points of interest
+/// </summary>
+public class CityWithoutPointsOfInterestDto
 {
     /// <summary>
-    /// A city without points of interest
+    /// The id of the city
     /// </summary>
-    public class CityWithoutPointsOfInterestDto
-    {
-        /// <summary>
-        /// The id of the city
-        /// </summary>
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        /// <summary>
-        /// The name of the city 
-        /// </summary>
-        public string Name { get; set; } = string.Empty;
+    /// <summary>
+    /// The name of the city 
+    /// </summary>
+    public string Name { get; set; } = string.Empty;
 
-        /// <summary>
-        /// The description of the city
-        /// </summary>
-        public string? Description { get; set; } 
-    }
+    /// <summary>
+    /// The description of the city
+    /// </summary>
+    public string? Description { get; set; } 
 }

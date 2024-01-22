@@ -14,8 +14,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Reflection;
-using System.Security.Cryptography.Xml;
-using System.Text;
 
 
 Log.Logger = new LoggerConfiguration()
@@ -92,7 +90,7 @@ builder.Services.AddDbContext<CityInfoContext>(
 builder.Services.AddScoped<ICityInfoRepository, CityInfoRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+ 
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer(options =>
     {
@@ -104,19 +102,17 @@ builder.Services.AddAuthentication("Bearer")
             ValidIssuer = builder.Configuration["Authentication:Issuer"],
             ValidAudience = builder.Configuration["Authentication:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
-               Convert.FromBase64String(builder.Configuration["Authentication:SecretForKey"]))
+               Convert.FromBase64String(builder.Configuration["Authentication:SecretForKey"] ?? ""))
         };
     }
     );
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("MustBeFromAntwerp", policy =>
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("MustBeFromAntwerp", policy =>
     {
         policy.RequireAuthenticatedUser();
         policy.RequireClaim("city", "Antwerp");
     });
-});
 
 builder.Services.AddApiVersioning(setupAction =>
 {
@@ -209,17 +205,12 @@ app.UseSwaggerUI(setupAction =>
 });
 //}
 
-app.UseHttpsRedirection();
-
-app.UseRouting();
+app.UseHttpsRedirection(); 
 
 app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.MapControllers(); 
 
 app.Run();
