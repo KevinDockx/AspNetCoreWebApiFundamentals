@@ -1,0 +1,50 @@
+@schema=https
+@hostname=localhost 
+@port=7169
+
+GET {{schema}}://{{hostname}}:{{port}}/api/v2/cities
+
+###
+
+GET {{schema}}://{{hostname}}:{{port}}/api/v2/cities
+Accept: application/xml
+
+###
+
+
+// This won't work.
+# @name createpoi
+POST {{schema}}://{{hostname}}:{{port}}/api/v2/cities/1/pointsofinterest
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "A name for testing",
+  "description": "A description for testing"
+} 
+
+###
+
+@poiid = {{createpoi.response.body.id}}
+
+GET {{schema}}://{{hostname}}:{{port}}/api/v2/cities/1/pointsofinterest/{{poiid}}
+Accept: application/json
+
+###
+
+// get a token 
+POST {{schema}}://{{hostname}}:{{port}}/api/authentication/authenticate
+Content-Type: application/json
+
+{
+    "username": "KevinDockx",
+    "password": "This is a relatively long sentence that acts as my password"
+}
+
+###
+
+// authenticated GET request
+GET {{schema}}://{{hostname}}:{{port}}/api/v2/cities
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IktldmluIiwiZmFtaWx5X25hbWUiOiJEb2NreCIsImNpdHkiOiJBbnR3ZXJwIiwibmJmIjoxNzA1NTc0Mjg0LCJleHAiOjE3MDU1Nzc4ODQsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjkiLCJhdWQiOiJjaXR5aW5mb2FwaSJ9.H7mXjRGrVSyvpQ9JczohPb-nagVVknDTEhM4fp8wq3g
+
+###

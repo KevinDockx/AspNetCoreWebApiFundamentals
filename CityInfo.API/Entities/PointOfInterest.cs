@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace CityInfo.API.Entities
 {
@@ -14,8 +14,7 @@ namespace CityInfo.API.Entities
         public string Name { get; set; }
 
         [MaxLength(200)]
-        public string Description { get; set; }
-
+        public string? Description { get; set; }
 
         [ForeignKey("CityId")]
         public City? City { get; set; }

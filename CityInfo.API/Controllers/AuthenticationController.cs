@@ -66,7 +66,7 @@ namespace CityInfo.API.Controllers
 
             // Step 2: create a token
             var securityKey = new SymmetricSecurityKey(
-                Encoding.ASCII.GetBytes(_configuration["Authentication:SecretForKey"]));
+                Convert.FromBase64String(_configuration["Authentication:SecretForKey"]));
             var signingCredentials = new SigningCredentials(
                 securityKey, SecurityAlgorithms.HmacSha256);
              
