@@ -105,5 +105,19 @@
             The description of the city
             </summary>
         </member>
+        <member name="T:CityInfo.API.Services.ConfigureSwaggerGenOptions">
+            <summary>
+            Configures the Swagger generation options.  The IConfigureOptions approach is used to avoid having to 
+            create an in-between service provider simply to get an IApiVersionDescriptionProvider 
+            (which is required to created versioned OpenAPI specifications)
+            </summary> 
+        </member>
+        <member name="M:CityInfo.API.Services.ConfigureSwaggerGenOptions.#ctor(Asp.Versioning.ApiExplorer.IApiVersionDescriptionProvider)">
+            <summary>
+            Configures the Swagger generation options.  The IConfigureOptions approach is used to avoid having to 
+            create an in-between service provider simply to get an IApiVersionDescriptionProvider 
+            (which is required to created versioned OpenAPI specifications)
+            </summary> 
+        </member>
     </members>
 </doc>
