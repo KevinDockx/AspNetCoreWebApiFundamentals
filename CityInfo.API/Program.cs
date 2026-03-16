@@ -11,8 +11,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+using Microsoft.IdentityModel.Tokens; 
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
@@ -91,8 +90,10 @@ builder.Services.AddDbContext<CityInfoContext>(
 
 builder.Services.AddScoped<ICityInfoRepository, CityInfoRepository>();
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
- 
+// register AutoMapper-related services
+builder.Services.AddAutoMapper(config => { },
+    AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer(options =>
     {
